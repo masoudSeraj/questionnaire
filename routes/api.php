@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\ResponderController;
+use App\Models\Responder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +20,5 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/', [QuestionController::class, 'index'])->name('question.index')->middleware('visit');
+Route::put('{question}/submit', [QuestionController::class, 'submit'])->name('question.submit');

@@ -3,6 +3,8 @@
 namespace Tests\Feature;
 
 // use Illuminate\Foundation\Testing\RefreshDatabase;
+
+use App\Enums\Code;
 use Tests\TestCase;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,5 +24,14 @@ class ExampleTest extends TestCase
         User::factory()->create();
 
         $this->assertDatabaseCount('users', 1);
+    }
+
+    public function test_basics()
+    {
+        $names = array_map(function ($value) {
+            return $value->name;
+        }, Code::cases());
+
+        $this->assertSame(['A', 'B', 'C', 'D'], $names);
     }
 }
