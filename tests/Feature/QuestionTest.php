@@ -2,17 +2,17 @@
 
 namespace Tests\Feature;
 
-use Tests\TestCase;
 use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Responder;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Testing\Fluent\AssertableJson;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Testing\Fluent\AssertableJson;
+use Tests\TestCase;
 
 class QuestionTest extends TestCase
 {
     use RefreshDatabase;
+
     /**
      * A basic feature test example.
      */
@@ -30,7 +30,7 @@ class QuestionTest extends TestCase
 
         $this->assertDatabaseHas('answer_responder', [
             'answer_id' => Answer::first()->id,
-            'responder_id' => $responder->id
+            'responder_id' => $responder->id,
         ]);
         $response->assertStatus(200);
     }
@@ -42,19 +42,18 @@ class QuestionTest extends TestCase
             Answer::factory()->count(4)
         )->create();
 
-        $response =  $this->get(route('question.index'));
+        $response = $this->get(route('question.index'));
 
         $response->assertJsonStructure([
             'data' => [
-                '*' =>
-                [
+                '*' => [
                     'question',
                     'code',
                     'answers' => [
-                        '*' => ['answer_id', 'question_id', 'answer', 'code', 'score']
-                    ]
-                ]
-            ]
+                        '*' => ['answer_id', 'question_id', 'answer', 'code', 'score'],
+                    ],
+                ],
+            ],
         ]);
     }
 
@@ -67,17 +66,15 @@ class QuestionTest extends TestCase
         // dd(Answer::first());
         // dd(Question::all());
 
-        $response =  $this->get(route('question.index'));
+        $response = $this->get(route('question.index'));
         // dd(json_decode($response->getContent(), true));
         $response
             ->assertJson(
-                fn (AssertableJson $json) =>
-                $json
+                fn (AssertableJson $json) => $json
                     ->has(
                         'data',
                         1,
-                        fn (AssertableJson $json) =>
-                        $json->where('id', $question->id)
+                        fn (AssertableJson $json) => $json->where('id', $question->id)
                             ->where('question', $question->question)
                             ->where('code', $question->code)
                             ->has('answers', 4)

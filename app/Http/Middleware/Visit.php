@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use App\Models\Responder;
-use Illuminate\Support\Str;
+use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response;
 
 class Visit
@@ -19,10 +19,10 @@ class Visit
     {
         // dd($request);
         $utm = [
-            'utm_campaign'  => $request->query('utm_campaign'),
+            'utm_campaign' => $request->query('utm_campaign'),
         ];
 
-        if (!is_null($request->query('utm_source'))) {
+        if (! is_null($request->query('utm_source'))) {
             $utm['utm_source'] = $request->query('utm_source');
             $utm['utm_medium'] = $request->query('utm_medium');
         } else {
@@ -32,12 +32,12 @@ class Visit
 
         $responder = Responder::create([
             'uuid' => Str::uuid(),
-            'ip_address'    => $request->ip ?? '00.00.00.00',
-            'utm_source'   => $utm['utm_source'],
-            'utm_medium'    => $utm['utm_medium'],
-            'utm_campaign'  =>  $utm['utm_campaign'],
-            'user_agent'    => $request->userAgent(),
-            'finger_print'  => $request->fingerprint()
+            'ip_address' => $request->ip ?? '00.00.00.00',
+            'utm_source' => $utm['utm_source'],
+            'utm_medium' => $utm['utm_medium'],
+            'utm_campaign' => $utm['utm_campaign'],
+            'user_agent' => $request->userAgent(),
+            'finger_print' => $request->fingerprint(),
         ]);
         session()->put('responder', $responder->uuid);
 

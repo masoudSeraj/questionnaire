@@ -19,9 +19,9 @@ class AnswerFactory extends Factory
     {
         return [
             'question_id' => Question::class,
-            'answer'    => fake()->text(100),
-            'code'      =>  fake()->randomElement([0, 1, 2, 3]),
-            'score'     => fake()->randomElement([25, 50, 75, 100])
+            'answer' => fake()->text(100),
+            'code' => fake()->randomElement([0, 1, 2, 3]),
+            'score' => fake()->randomElement([25, 50, 75, 100]),
         ];
     }
 }

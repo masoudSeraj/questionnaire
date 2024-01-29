@@ -11,6 +11,7 @@ enum Score: int
     case GOOD = 50;
 
     case GREAT = 100;
+
     public function translate(): string
     {
         return match ($this) {

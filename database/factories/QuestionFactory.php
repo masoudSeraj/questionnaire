@@ -17,8 +17,8 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'question'  => fake()->text(100),
-            'code'  => fake()->numberBetween(1, 4)
+            'question' => fake()->text(100),
+            'code' => fake()->numberBetween(1, 4),
         ];
     }
 }

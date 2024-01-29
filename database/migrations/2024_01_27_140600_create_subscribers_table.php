@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('subscribers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('responder_id');
+            $table->foreign('responder_id')->references('id')->on('responders')->onDelete('cascade');
+            $table->string('mobile');
+            $table->timestamp('validated_at')->nullable();
             $table->timestamps();
         });
     }

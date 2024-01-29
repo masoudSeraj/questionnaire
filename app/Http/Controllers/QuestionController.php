@@ -14,6 +14,7 @@ class QuestionController extends Controller
     {
         return QuestionResource::collection(Question::with('answers')->get());
     }
+
     public function submit(Request $request, Question $question)
     {
         $uuid = session()->exists('responder') ? session('responder') : throw new \Exception('خطایی رخ داده است!');

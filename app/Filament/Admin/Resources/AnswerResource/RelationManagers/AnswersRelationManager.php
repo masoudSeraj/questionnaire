@@ -3,16 +3,13 @@
 namespace App\Filament\Admin\Resources\AnswerResource\RelationManagers;
 
 use App\Enums\Code;
-use Filament\Forms;
 use App\Enums\Score;
-use Filament\Tables;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
+use Filament\Forms;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Tables;
+use Filament\Tables\Table;
 
 class AnswersRelationManager extends RelationManager
 {
@@ -23,16 +20,18 @@ class AnswersRelationManager extends RelationManager
         return $form
             ->schema([
                 Forms\Components\TextInput::make('answer')
+                    ->label('سوال')
                     ->required()
                     ->maxLength(255),
-                Select::make('code')->options(array_map(
+                Select::make('code')->label('کد')->options(array_map(
                     fn ($value) => $value->name,
                     Code::cases()
                 )),
-                Select::make('score')->options(array_map(
-                    fn ($value) => $value->translate(),
-                    Score::cases()
-                ))
+                Select::make('score')->label('امتیاز')->options(
+                    collect(Score::cases())->mapWithKeys(
+                        fn ($value) => [$value->value => $value->value]
+                    )
+                ),
             ]);
     }
 
@@ -41,7 +40,10 @@ class AnswersRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('answer')
             ->columns([
-                Tables\Columns\TextColumn::make('answer'),
+                Tables\Columns\TextColumn::make('answer')->label('سوال'),
+                Tables\Columns\TextColumn::make('code')->formatStateUsing(fn ($state) => Code::tryFrom($state)->name)->label('کد'),
+                Tables\Columns\TextColumn::make('score')->formatStateUsing(fn ($state) => Score::tryFrom($state)->value.' / '.Score::tryFrom($state)->translate())->label('امتیاز'),
+
             ])
             ->filters([
                 //

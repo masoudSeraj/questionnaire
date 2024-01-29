@@ -11,6 +11,7 @@ enum Code: int
     case C = 2;
 
     case D = 3;
+
     public function translate(): string
     {
         return match ($this) {

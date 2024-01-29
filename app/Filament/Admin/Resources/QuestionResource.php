@@ -2,18 +2,15 @@
 
 namespace App\Filament\Admin\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\Question;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\TextInput;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Admin\Resources\QuestionResource\Pages;
-use App\Filament\Admin\Resources\QuestionResource\RelationManagers;
 use App\Filament\Admin\Resources\AnswerResource\RelationManagers\AnswersRelationManager;
+use App\Filament\Admin\Resources\QuestionResource\Pages;
+use App\Models\Question;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 
 class QuestionResource extends Resource
 {
@@ -25,8 +22,8 @@ class QuestionResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('question')->required(),
-                TextInput::make('code')->required(),
+                TextInput::make('question')->label('سوال')->required(),
+                TextInput::make('code')->label('کد')->required(),
             ]);
     }
 
@@ -34,7 +31,8 @@ class QuestionResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('question')->label('سوال'),
+                TextColumn::make('code')->label('کد'),
             ])
             ->filters([
                 //
@@ -52,7 +50,7 @@ class QuestionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            AnswersRelationManager::class
+            AnswersRelationManager::class,
         ];
     }
 
