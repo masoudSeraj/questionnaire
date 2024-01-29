@@ -6,11 +6,6 @@ use Throwable;
 
 interface OtpContract
 {
-    protected const TYPE = [
-        'numeric',
-        'alpha_numeric',
-    ];
-
     /**
      * generate otp
      *
@@ -39,7 +34,21 @@ interface OtpContract
      */
     public function setType(string $type): self|Throwable;
 
+    /**
+     * Method setLength
+     *
+     * @param int $length 
+     *
+     * @return self
+     */
     public function setLength(int $length): self;
-
+    
+    /**
+     * Method setValidity
+     *
+     * @param int $time 
+     *
+     * @return self
+     */
     public function setValidity(int $time): self;
 }
