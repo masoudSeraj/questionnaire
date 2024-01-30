@@ -19,11 +19,10 @@ class OtpService implements OtpContract
     protected $type = 'numeric';
 
     protected $validity = 2;
-    
+
     /**
      * Method __construct
      *
-     * @param public \Ichtrojan\Otp\Otp $otp 
      *
      * @return void
      */

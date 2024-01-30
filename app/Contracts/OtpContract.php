@@ -36,19 +36,11 @@ interface OtpContract
 
     /**
      * Method setLength
-     *
-     * @param int $length 
-     *
-     * @return self
      */
     public function setLength(int $length): self;
-    
+
     /**
      * Method setValidity
-     *
-     * @param int $time 
-     *
-     * @return self
      */
     public function setValidity(int $time): self;
 }
