@@ -13,7 +13,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::factory()->state(['name' => 'masoud seraj', 'email' => 'masoud.seraj.1991@gmail.com'])->create();
+        $user = User::factory()->state([
+            'name' => 'masoud',
+            'lastname' => 'seraj',
+            'mobile' => '09118694561',
+            'email' => 'masoud.seraj.1991@gmail.com',
+        ])->create();
+
         $role = Role::create(['name' => config('questionnaire.super-admin')]);
 
         $user->assignRole($role);

@@ -1,3 +1,5 @@
-<?php return [
-    'super-admin'   => 'super admin'
+<?php
+
+return [
+    'super-admin' => 'super admin',
 ];

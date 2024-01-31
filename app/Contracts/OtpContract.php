@@ -18,8 +18,6 @@ interface OtpContract
     /**
      * validate
      *
-     * @param  string  $identifier
-     * @param  string  $token
      * @return object
      */
     public function validate(string $identifier, string $token);
@@ -27,7 +25,6 @@ interface OtpContract
     /**
      * setType for specified otp service
      *
-     * @param  string  $type
      * @return self
      *
      * @throws \Exception

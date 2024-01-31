@@ -1,43 +1,41 @@
 <?php
 
 namespace App\Services;
-use Illuminate\Http\Request;
+
 use App\Contracts\AuthContract;
+use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthService implements AuthContract
 {
     /**
-     * login
-     *
-     * @param  Request $request
-     * @return object{type: "success"|"error", message: string, token?: string}
-     */
-    public function login(Request $request)
-    {
-        return (object)response()->json(['type' => 'success', 'message' => 'ok']);
-    }
-
-    /**
      * register
      *
-     * @param  Request $request
-     * @return void
+     * @param  array<string, string>  $data
+     * @return array{type: string, message: string, token: string}
      */
-    public function register(Request $request)
+    public function register(array $data)
     {
+        $user = User::create([
+            'name' => $data['name'],
+            'lastname' => $data['lastname'],
+            'mobile' => $data['mobile'],
+            'password' => Hash::make($data['password']),
+        ]);
 
+        $token = $user->createToken('register token')->plainTextToken;
+
+        return ['type' => 'success', 'message' => 'ثبت نام با موفقیت انجام شد.', 'token' => $token];
     }
 
     /**
      * logout
      *
-     * @param  Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function logout(Request $request)
     {
         return response()->json();
     }
-
-
 }

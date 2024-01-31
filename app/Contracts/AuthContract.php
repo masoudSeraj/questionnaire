@@ -7,18 +7,12 @@ use Illuminate\Http\Request;
 interface AuthContract
 {
     /**
-     * login
-     *
-     * @return object{"type": "success"|"error", "message": string, "token"?: string}
-     */
-    public function login(Request $request);
-
-    /**
      * register
      *
-     * @return mixed
+     * @param  array<string, string>  $data
+     * @return array<string, string>
      */
-    public function register(Request $request);
+    public function register(array $data);
 
     /**
      * logout

@@ -7,7 +7,6 @@ use App\Models\Answer;
 use App\Models\Question;
 use App\Models\Responder;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
@@ -26,7 +25,7 @@ class QuestionController extends Controller
         $request->whenFilled('answer_id', function () use ($responder, $request) {
             $answer = Answer::query()->find($request->input('answer_id'));
 
-            if($answer instanceof Answer && $responder instanceof Responder){
+            if ($answer instanceof Answer && $responder instanceof Responder) {
                 $answer->responders()->syncWithoutDetaching([$responder->id]);
             }
         });

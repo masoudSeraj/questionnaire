@@ -44,10 +44,6 @@ class OtpService implements OtpContract
 
     /**
      * validate
-     *
-     * @param  string  $identifier
-     * @param  string  $token
-     * @return object
      */
     public function validate(string $identifier, string $token): object
     {
@@ -75,9 +71,6 @@ class OtpService implements OtpContract
 
     /**
      * setLength
-     *
-     * @param  int $length
-     * @return self
      */
     public function setLength(int $length): self
     {
@@ -86,12 +79,8 @@ class OtpService implements OtpContract
         return $this;
     }
 
-
     /**
      * setValidity
-     *
-     * @param  int $minutes
-     * @return self
      */
     public function setValidity(int $minutes): self
     {
