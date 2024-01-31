@@ -9,25 +9,25 @@ interface OtpContract
     /**
      * generate otp
      *
-     * @return array{status: true, token: string, message: string}
+     * @return object
      *
      * @throws \Exception
      */
-    public function generate(string $identifier): object;
+    public function generate(string $identifier);
 
     /**
      * validate
      *
-     * @param  mixed  $identifier
-     * @param  mixed  $token
-     * @return array{status: boolean, message: string}
+     * @param  string  $identifier
+     * @param  string  $token
+     * @return object
      */
     public function validate(string $identifier, string $token);
 
     /**
      * setType for specified otp service
      *
-     * @param  value-of<self::TYPE>  $type
+     * @param  string  $type
      * @return self
      *
      * @throws \Exception

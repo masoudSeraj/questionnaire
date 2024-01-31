@@ -9,16 +9,16 @@ use Throwable;
 
 class OtpService implements OtpContract
 {
-    protected $length = 6;
+    protected int $length = 6;
 
     protected const TYPE = [
         'numeric',
         'alpha_numeric',
     ];
 
-    protected $type = 'numeric';
+    protected string $type = 'numeric';
 
-    protected $validity = 2;
+    protected int $validity = 2;
 
     /**
      * Method __construct
@@ -33,11 +33,11 @@ class OtpService implements OtpContract
     /**
      * generate otp
      *
-     * @return array{status: true, token: string, message: string}
+     * @return object
      *
      * @throws Exception
      */
-    public function generate(string $identifier): object
+    public function generate(string $identifier)
     {
         return $this->otp->generate($identifier, $this->type, $this->length, $this->validity);
     }
@@ -45,9 +45,9 @@ class OtpService implements OtpContract
     /**
      * validate
      *
-     * @param  mixed  $identifier
-     * @param  mixed  $token
-     * @return array{status: boolean, message: string}
+     * @param  string  $identifier
+     * @param  string  $token
+     * @return object
      */
     public function validate(string $identifier, string $token): object
     {
@@ -75,6 +75,9 @@ class OtpService implements OtpContract
 
     /**
      * setLength
+     *
+     * @param  int $length
+     * @return self
      */
     public function setLength(int $length): self
     {
@@ -83,8 +86,12 @@ class OtpService implements OtpContract
         return $this;
     }
 
+
     /**
      * setValidity
+     *
+     * @param  int $minutes
+     * @return self
      */
     public function setValidity(int $minutes): self
     {

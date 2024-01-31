@@ -9,16 +9,21 @@ interface AuthContract
     /**
      * login
      *
-     * @param  Request $request
-     * @return \Illuminate\Http\JsonResponse object{"type": "success"|"error", "message": string, "token"?: string}
+     * @return object{"type": "success"|"error", "message": string, "token"?: string}
      */
     public function login(Request $request);
+
     /**
      * register
      *
-     * @param  Request $request
      * @return mixed
      */
     public function register(Request $request);
+
+    /**
+     * logout
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function logout(Request $request);
 }
