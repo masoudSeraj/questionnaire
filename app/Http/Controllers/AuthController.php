@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\AuthContract;
-use App\Contracts\LoginContract;
 use Exception;
 use Illuminate\Http\Request;
+use App\Contracts\AuthContract;
+use App\Contracts\LoginContract;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -16,7 +16,7 @@ class AuthController extends Controller
 
     /**
      * login
-     *
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request)

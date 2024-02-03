@@ -3,12 +3,14 @@
 namespace App\Services;
 
 use App\Contracts\AuthContract;
+use App\Contracts\TokenContract;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class AuthService implements AuthContract
 {
+    public function __construct(public TokenContract $tokenContract){}
     /**
      * register
      *
@@ -24,7 +26,7 @@ class AuthService implements AuthContract
             'password' => Hash::make($data['password']),
         ]);
 
-        $token = $user->createToken('register token')->plainTextToken;
+        $token = $this->tokenContract->for($user)->create('register token');
 
         return ['type' => 'success', 'message' => 'ثبت نام با موفقیت انجام شد.', 'token' => $token];
     }

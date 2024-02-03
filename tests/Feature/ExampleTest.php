@@ -28,7 +28,7 @@ class ExampleTest extends TestCase
         $this->assertDatabaseCount('users', 1);
     }
 
-    public function test_basics()
+    public function test_cases()
     {
         $names = array_map(function ($value) {
             return $value->name;

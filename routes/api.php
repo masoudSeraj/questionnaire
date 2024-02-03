@@ -14,10 +14,10 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('register', [AuthController::class, 'register'])->name('auth.register');
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('login', [AuthController::class, 'login'])->name('auth.login');
-    Route::post('register', [AuthController::class, 'register'])->name('auth.register');
     Route::post('logout', [AuthController::class, 'logout'])->name('auth.logout');
 });
 Route::get('/', [QuestionController::class, 'index'])->name('question.index')->middleware('visit');

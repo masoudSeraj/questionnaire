@@ -2,11 +2,14 @@
 
 namespace App\Services;
 
+use App\Contracts\LoginContract;
+use App\Contracts\TokenContract;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
-class LoginService
+class LoginService implements LoginContract
 {
+    public function __construct(public TokenContract $tokenContract){}
     /**
      * login
      *
@@ -24,7 +27,7 @@ class LoginService
             throw new \Exception('نام کاربری یا رمز عبور اشتباه است!');
         }
 
-        $token = $user->createToken('login token')->plainTextToken;
+        $token = $this->tokenContract->for($user)->create('login');
 
         return [
             'type' => 'success',
